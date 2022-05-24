@@ -1,0 +1,55 @@
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: 1rem;
+  height: calc(100vh - (5rem + 1px));
+
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero {
+  flex: 1;
+
+  p {
+    font-size: 1.5rem;
+
+    &:first-child {
+      font-weight: bold;
+      line-height: 2.25rem;
+    }
+  }
+
+  h1 {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+    font-weight: 900;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+
+    span {
+      color: var(--cyan-500);
+    }
+  }
+
+  button {
+    margin-top: 2.5rem;
+  }
+}
+
+.subscribeInfo {
+  font-weight: normal;
+
+  span {
+    font-weight: bold;
+    color: var(--cyan-500);
+  }
+}
+
+.detailImage {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+}

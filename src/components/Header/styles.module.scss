@@ -1,12 +1,12 @@
 .header {
   border-bottom: 1px solid var(--gray-800);
-  padding-inline: 1rem;
 }
 
 .content {
   max-width: 1120px;
   margin: 0 auto;
   height: 5rem;
+  padding-inline: 1rem;
 
   display: flex;
   align-items: center;
