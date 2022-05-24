@@ -2,7 +2,8 @@ import Image from "next/image";
 
 import logo from "/public/images/logo.svg";
 
-import styles from "../styles/components/header.module.scss";
+import styles from "./styles.module.scss";
+import { SignInButton } from "../SignInButton";
 
 export function Header() {
   return (
@@ -21,6 +22,7 @@ export function Header() {
             </li>
           </ul>
         </nav>
+        <SignInButton />
       </div>
     </header>
   );
