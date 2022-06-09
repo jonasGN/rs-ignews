@@ -3,11 +3,11 @@ import Image from "next/image";
 import { GetStaticProps } from "next";
 
 import { stripe } from "../services/stripe";
+import { toCurrency } from "../utils/formatters";
 import { SubscribeButton } from "../components/SubscribeButton";
 
 import womanPic from "/public/images/girl-coding.svg";
 import styles from "../styles/pages/home.module.scss";
-import { toCurrency } from "../utils/formatters";
 
 interface HomeProps {
   product: {
@@ -24,7 +24,7 @@ export default function Home({ product }: HomeProps) {
       </Head>
       <main className={styles.container}>
         <section className={styles.hero}>
-          <p>👏 Hey, Welcome</p>
+          <p>👏 Hey, welcome</p>
           <h1>
             News about <br /> the <span>React</span> world
           </h1>
