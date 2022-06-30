@@ -1,9 +1,23 @@
 import Head from "next/head";
+import { GetStaticProps } from "next";
+import { asText } from "@prismicio/helpers";
 import { PostTile } from "../../components/PostTile";
+import { getPrismicClient } from "../../services/prismic";
 
 import styles from "./styles.module.scss";
 
-export default function Posts() {
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+};
+
+interface PostsProps {
+  posts: Post[];
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -11,33 +25,43 @@ export default function Posts() {
       </Head>
       <main className={styles.container}>
         <div className={styles.postList}>
-          <PostTile
-            time="12 de março de 2021"
-            title="Creating a Monorepo with Lerna & Yarn Workspaces"
-            content="In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process."
-          />
-          <PostTile
-            time="12 de março de 2021"
-            title="Creating a Monorepo with Lerna & Yarn Workspaces"
-            content="In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process."
-          />
-          <PostTile
-            time="12 de março de 2021"
-            title="Creating a Monorepo with Lerna & Yarn Workspaces"
-            content="In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process."
-          />
-          <PostTile
-            time="12 de março de 2021"
-            title="Creating a Monorepo with Lerna & Yarn Workspaces"
-            content="In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process."
-          />
-          <PostTile
-            time="12 de março de 2021"
-            title="Creating a Monorepo with Lerna & Yarn Workspaces"
-            content="In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process."
-          />
+          {posts.map((post) => (
+            <PostTile
+              key={post.slug}
+              time={post.updatedAt}
+              title={post.title}
+              content={post.excerpt}
+            />
+          ))}
         </div>
       </main>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const client = getPrismicClient();
+
+  // fetch posts
+  const response = await client.get({
+    pageSize: 100,
+    fetch: ["post.title", "post.content"],
+  });
+
+  const posts = response.results.map((post) => {
+    return {
+      slug: post.uid,
+      title: asText(post.data.title),
+      excerpt: post.data.content.find((c) => c.type === "paragraph")?.text ?? "",
+      updatedAt: new Date(post.last_publication_date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
+    };
+  });
+
+  return {
+    props: { posts },
+  };
+};
