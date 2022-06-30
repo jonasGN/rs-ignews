@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import { asText } from "@prismicio/helpers";
 import { PostTile } from "../../components/PostTile";
 import { getPrismicClient } from "../../services/prismic";
+import { toLocaleDate } from "../../utils/formatters";
 
 import styles from "./styles.module.scss";
 
@@ -52,12 +53,8 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       slug: post.uid,
       title: asText(post.data.title),
-      excerpt: post.data.content.find((c) => c.type === "paragraph")?.text ?? "",
-      updatedAt: new Date(post.last_publication_date).toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      }),
+      excerpt: formatExcerpt(post.data.content),
+      updatedAt: toLocaleDate(post.last_publication_date),
     };
   });
 
@@ -65,3 +62,9 @@ export const getStaticProps: GetStaticProps = async () => {
     props: { posts },
   };
 };
+
+function formatExcerpt(content): string {
+  return (
+    content.find((c) => c.type === "paragraph")?.text.substring(0, 260) + "..." ?? ""
+  );
+}
