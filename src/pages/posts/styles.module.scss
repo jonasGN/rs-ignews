@@ -1,0 +1,21 @@
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: 1rem;
+  height: calc(100vh - (5rem + 1px));
+}
+
+.postList {
+  max-width: 720px;
+  margin: 3rem auto 0;
+  padding-inline: 1rem;
+  height: calc(100vh - (5rem + 1px));
+
+  a {
+    & + a {
+      border-top: 1px solid var(--gray-700);
+      margin-top: 2rem;
+      padding-top: 2rem;
+    }
+  }
+}
