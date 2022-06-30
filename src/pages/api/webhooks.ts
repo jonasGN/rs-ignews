@@ -12,7 +12,11 @@ async function getBuffer(readable: Readable) {
   return Buffer.concat(chunks);
 }
 
-const relevantEvents = new Set(["checkout.session.completed"]);
+const relevantEvents = new Set([
+  "checkout.session.completed",
+  "customer.subscription.updated",
+  "customer.subscription.deleted",
+]);
 
 export const config = {
   api: {
@@ -44,6 +48,17 @@ async function handler(request: NextApiRequest, response: NextApiResponse) {
             await saveSubscription({
               customerId: checkoutSession.customer.toString(),
               subscriptionId: checkoutSession.subscription.toString(),
+              createAction: true,
+            });
+            break;
+          case "customer.subscription.updated":
+          case "customer.subscription.deleted":
+            const subscription = event.data.object as Stripe.Subscription;
+
+            await saveSubscription({
+              customerId: subscription.customer.toString(),
+              subscriptionId: subscription.id,
+              createAction: false,
             });
             break;
           default:
