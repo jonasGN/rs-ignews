@@ -2,16 +2,50 @@
   max-width: 1120px;
   margin: 0 auto;
   padding-inline: 1rem;
-  height: calc(100vh - (5rem + 1px));
 }
 
 .postList {
   max-width: 720px;
-  margin: 3rem auto 0;
+  margin: 3rem auto 2rem;
   padding-inline: 1rem;
-  height: calc(100vh - (5rem + 1px));
 
   a {
+    display: block;
+
+    * {
+      display: block;
+    }
+
+    time,
+    p {
+      color: var(--gray-300);
+      line-height: 1.6;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    strong {
+      margin-top: 1rem;
+      margin-bottom: 0.25rem;
+
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 1.4;
+
+      transition: color 0.2s ease;
+    }
+
+    p,
+    strong {
+      max-width: 80ch;
+    }
+
+    &:hover {
+      strong {
+        color: var(--yellow-500);
+      }
+    }
+
     & + a {
       border-top: 1px solid var(--gray-700);
       margin-top: 2rem;

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
+import Link from "next/link";
 import { asText } from "@prismicio/helpers";
-import { PostTile } from "../../components/PostTile";
 import { getPrismicClient } from "../../services/prismic";
 import { toLocaleDate } from "../../utils/formatters";
 
@@ -27,12 +27,13 @@ export default function Posts({ posts }: PostsProps) {
       <main className={styles.container}>
         <div className={styles.postList}>
           {posts.map((post) => (
-            <PostTile
-              key={post.slug}
-              time={post.updatedAt}
-              title={post.title}
-              content={post.excerpt}
-            />
+            <Link key={post.slug} href={`/posts/${post.slug}`}>
+              <a className={styles.container}>
+                <time>{post.updatedAt}</time>
+                <strong>{post.title}</strong>
+                <p>{post.excerpt}</p>
+              </a>
+            </Link>
           ))}
         </div>
       </main>

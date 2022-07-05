@@ -1,0 +1,47 @@
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: 1rem;
+}
+
+.post {
+  max-width: 720px;
+  margin: 3rem auto 2rem;
+  padding-inline: 1rem;
+
+  h1 {
+    font-size: 3.375rem;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  time {
+    display: block;
+    margin-top: 1.5rem;
+    color: var(--gray-300);
+  }
+}
+
+.content {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.875rem;
+  color: var(--gray-100);
+
+  p,
+  ul {
+    margin: 1.5rem 0;
+  }
+
+  a {
+    color: var(--yellow-500);
+  }
+
+  ul {
+    padding-left: 1.5rem;
+
+    li {
+      margin-inline: 0.5rem;
+    }
+  }
+}

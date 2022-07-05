@@ -8,7 +8,7 @@ interface PostTileProps {
 
 export function PostTile(props: PostTileProps) {
   return (
-    <a href="#" className={styles.container}>
+    <a className={styles.container}>
       <time>{props.time}</time>
       <strong>{props.title}</strong>
       <p>{props.content}</p>
