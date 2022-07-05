@@ -44,4 +44,30 @@
       margin-inline: 0.5rem;
     }
   }
+
+  &.preview {
+    background: linear-gradient(var(--gray-100), transparent);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.continueReadingButton {
+  display: block;
+  background-color: var(--gray-850);
+  padding: 1.5rem;
+  border-radius: 100rem;
+
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+
+  span {
+    color: var(--yellow-500);
+  }
+
+  transition: all 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 }
