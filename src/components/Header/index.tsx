@@ -4,6 +4,7 @@ import logo from "/public/images/logo.svg";
 
 import styles from "./styles.module.scss";
 import { SignInButton } from "../SignInButton";
+import { ActiveLink } from "./ActiveLink";
 
 export function Header() {
   return (
@@ -13,12 +14,14 @@ export function Header() {
         <nav className={styles.navMenu}>
           <ul>
             <li>
-              <a href="" className={styles.active}>
-                Home
-              </a>
+              <ActiveLink href="/" activeClassName={styles.active}>
+                <a>Home</a>
+              </ActiveLink>
             </li>
             <li>
-              <a href="">Posts</a>
+              <ActiveLink href="/posts" activeClassName={styles.active}>
+                <a>Posts</a>
+              </ActiveLink>
             </li>
           </ul>
         </nav>
